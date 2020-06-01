@@ -2,7 +2,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>뷰 기초 복습</title>
+    <title>뷰 기초 복습 (인스턴스,데이터,메소드,바인딩)</title>
+    
     <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
 </head>
 <body>
@@ -10,7 +11,9 @@
         <!-- {{ person }} <br/>
         {{ person.name }} <br/>
         {{ person.age }} -->
-        {{ nextYear() }}
+        {{ nextYear('안녕하세요') }}
+        <input v-bind:type="type" :value="inputDate"> <!-- v-bind를 이용하여 데이터 바인딩 -->
+        <a :href="getKossieCoderLink('kossiecoder')">코지 코더 채널</a>
     </div>
     <script>
         new Vue({
@@ -18,18 +21,27 @@
             data: {
                 person: {
                     name: '김민우',
-                    age: 34,
-                } 
+                    age: 29,
+                },
+                inputDate: 'hello',
+                type: 'text',
+                link: 'https://www.youtube.com/' 
             },
             
             methods: {
-                nextYear(){
-                   return this.person.name + '는 내년에' + (this.person.age + 1) + '살 입니다.'
+                getKossieCoderLink(channel){
+                    return this.link + channel;
+                },
+                nextYear(greeting) {
+                   return greeting + '!'+ this.person.name + '는 내년에' + (this.person.age + 1) + '살 입니다.'
                 },
                 
                 /* nextYear: function() {
                     return this.person.name + '는 내년에' + (this.person.age + 1) + '살 입니다.'
                 } */
+                otherMethod() {
+                    this.nextYear();
+                },
             },
         })
     </script>
