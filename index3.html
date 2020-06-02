@@ -1,0 +1,45 @@
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>뷰 기초 복습 (computed,watch 속성)</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+<body>
+    <div id="app">
+        <!-- {{ reversedMessage }} <br/> -->
+        {{ message }} <br/>
+        <button @click="changeMessage">Click</button> <br/>
+        {{ updated }} <br/>
+    </div>
+    <script>
+        new Vue({
+            el: '#app',
+            data: {
+              message: '안녕',
+              updated: '아니요',
+
+            },
+            methods: {
+                changeMessage() {
+                    this.message = 'hello';
+                }
+            },
+            computed: {  /* computed vs method 다른점 computed는 캐싱 기능이 있어 한번의 수행으로 얻어진 결과값이 저장되어 사용되고,
+                            computed 속성에 종속된 대상이 변경될 때만 함수를 재실행한다. 변경되지 않는 다면 여러번 요청해도 계산을 다시
+                            하지않고 계산 되어 있던 결과를 반환한다.
+                            method경우 호출할 때 마다 매번 해당 작업을 수행하여 결과값을 반환하게 된다. */
+                reversedMessage() {
+                    return this.message.split('').reverse().join('')
+                }
+            },
+            watch: {
+                message(newVal, oldVal) {
+                    console.log(newVal,oldVal);
+                    this.updated = '네';
+                }
+            },
+        })
+    </script>
+</body>
+</html>
