@@ -7,30 +7,37 @@
 </head>
 <body>
     <div id="app">
-        <template v-if="number === 1">
+        <!-- v-if는 조건이 거짓인 경우에는 렌더링이 되지 않고 참일 경우에만 렌더링이 된다.
+        v-show는 조건에 관계 없이 항상 렌더링이 된다. 자주 바꾸는 경우 v-show 사용 그외 v-if -->
+        <!-- <template v-if="number === 1">
             <div>1</div>
             <div>2</div>
             <div>3</div>
         </template>
         <div v-else-if="number === 2">Hi</div>
-        <!-- <div v-if="show">Yes</div> -->
+        <div v-if="show">Yes</div>
         <div v-else>No</div>
         <button @click="toggleShow">Toggle</button>
-        <button @click="increaseNumber">Increase</button> {{ number }}
+        <button @click="increaseNumber">Increase</button> {{ number }} -->
+        <div v-show="show">Yes</div>
+        <button @click="toggle">Click</button>
     </div>
     <script>
         new Vue({
             el: '#app',
             data: {
-                show: false,
+                show: true,
                 number: 1,
             },
             methods: {
-                toggleShow() {
+                /* toggleShow() {
                     this.show = !this.show;
-                },
+                }, */
                 increaseNumber() {
                     this.number ++;
+                },
+                toggle() {
+                    this.show = !this.show;
                 }
             },
         })
